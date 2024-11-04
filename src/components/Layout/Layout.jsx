@@ -6,13 +6,13 @@ import Container from "../Container/Container";
 const Layout = () => {
   return (
     <>
-      <Container>
+      
         <Navbar></Navbar>
         <div className="">
           <Outlet></Outlet>
         </div>
         <Footer></Footer>
-      </Container>
+
     </>
   );
 };
