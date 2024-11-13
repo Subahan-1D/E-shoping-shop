@@ -1,0 +1,111 @@
+[
+    {
+      "_id": "1a2b3c4d5e",
+      "name": "Classic Men's T-Shirt",
+      "price": 19.99,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Large",
+      "quality": "High",
+      "category": "Men"
+    },
+    {
+      "_id": "2f3g4h5i6j",
+      "name": "Casual Women's T-Shirt",
+      "price": 24.99,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Medium",
+      "quality": "Medium",
+      "category": "Women"
+    },
+    {
+      "_id": "3k4l5m6n7o",
+      "name": "V-Neck Men's T-Shirt",
+      "price": 22.49,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Small",
+      "quality": "High",
+      "category": "Men"
+    },
+    {
+      "_id": "4p5q6r7s8t",
+      "name": "Graphic Women's T-Shirt",
+      "price": 29.99,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Large",
+      "quality": "High",
+      "category": "Women"
+    },
+    {
+      "_id": "5u6v7w8x9y",
+      "name": "Slim Fit Men's T-Shirt",
+      "price": 18.50,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Medium",
+      "quality": "Medium",
+      "category": "Men"
+    },
+    {
+      "_id": "6z7a8b9c0d",
+      "name": "Oversized Women's T-Shirt",
+      "price": 32.00,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "X-Large",
+      "quality": "High",
+      "category": "Women"
+    },
+    {
+      "_id": "7e8f9g0h1i",
+      "name": "Sports Men's T-Shirt",
+      "price": 25.00,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "X-Small",
+      "quality": "Low",
+      "category": "Men"
+    },
+    {
+      "_id": "8j9k0l1m2n",
+      "name": "Cotton Women's T-Shirt",
+      "price": 15.99,
+      "image":"https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Small",
+      "quality": "Medium",
+      "category": "Women"
+    },
+    {
+      "_id": "9o0p1q2r3s",
+      "name": "Round Neck Men's T-Shirt",
+      "price": 20.75,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Large",
+      "quality": "High",
+      "category": "Men"
+    },
+    {
+      "_id": "0t1u2v3w4x",
+      "name": "Trendy Women's T-Shirt",
+      "price": 27.50,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Medium",
+      "quality": "High",
+      "category": "Women"
+    },
+    {
+      "_id": "0t1u2v3w4x",
+      "name": "Trendy Women's T-Shirt",
+      "price": 27.50,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Medium",
+      "quality": "High",
+      "category": "Women"
+    },
+    {
+      "_id": "0t1u2v3w4x",
+      "name": "Trendy Women's T-Shirt",
+      "price": 27.50,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Medium",
+      "quality": "High",
+      "category": "Women"
+    }
+  ]
+  
