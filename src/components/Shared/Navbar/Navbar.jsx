@@ -1,14 +1,15 @@
 import React from "react";
 import Container from "../../Container/Container";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <a>Home</a>
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <a>About</a>
+        <Link to="/menu">Product-Menu</Link>
       </li>
       <li>
         <a>Contact</a>
