@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import ProductCard from "../../components/Shared/ProductCard/ProductCard";
+import useMenu from "../../hooks/useMenu";
 
 const PopularProductItem = () => {
-  const [product, setProduct] = useState([]);
-  useEffect(() => {
-    fetch("product.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const filteredProducts = data.filter((item) => item.category === "Men");
-        setProduct(filteredProducts);
-      });
-  }, []);
+  const [menu, loading] = useMenu();
+  const product = menu.filter(item => item.category === "Men")
   return (
     <section>
       <SectionTitle
