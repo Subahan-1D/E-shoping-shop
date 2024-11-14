@@ -27,8 +27,8 @@ const ProductCard = ({ item }) => {
           </div>
         </div>
         <div className="card-actions">
-          <button className="btn btn-outline border-0 border-b-4 mt-4 bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2">
-            Buy Now
+          <button className="btn btn-outline border-0 border-b-4 mt-4 bg-blue-600 text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-700 transition-all duration-300 ease-in-out transform hover:scale-105 rounded-md px-4 py-2">
+            Add to cart
           </button>
         </div>
       </div>

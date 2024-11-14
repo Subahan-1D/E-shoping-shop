@@ -7,8 +7,9 @@ import "react-tabs/style/react-tabs.css";
 import useMenu from "../../hooks/useMenu";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { useParams } from "react-router-dom";
+import OrderTab from "./OrderTab";
 
-const Order = () => {
+const Order = ({ items }) => {
   const categories = ["Men", "Women", "Custom"];
   const { category } = useParams();
   const initialIndex = categories.indexOf(category);
@@ -60,25 +61,13 @@ const Order = () => {
           </Tab>
         </TabList>
         <TabPanel>
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {men.map((item) => (
-              <ProductCard key={item._id} item={item}></ProductCard>
-            ))}
-          </div>
+          <OrderTab items={men}></OrderTab>
         </TabPanel>
         <TabPanel>
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {women.map((item) => (
-              <ProductCard key={item._id} item={item}></ProductCard>
-            ))}
-          </div>
+          <OrderTab items={women}></OrderTab>
         </TabPanel>
         <TabPanel>
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {custom.map((item) => (
-              <ProductCard key={item._id} item={item}></ProductCard>
-            ))}
-          </div>
+          <OrderTab items={custom}></OrderTab>
         </TabPanel>
       </Tabs>
     </div>
