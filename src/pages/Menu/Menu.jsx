@@ -8,6 +8,7 @@ import SectionTitle from "../../components/SectionTitle/SectionTitle";
 const Menu = () => {
   const [menu] = useMenu();
   const women = menu.filter((item) => item.category === "Women");
+  const men = menu.filter((item) => item.category === "Men");
   const custom = menu.filter((item) => item.category === "Custom");
   return (
     <div>
@@ -22,6 +23,8 @@ const Menu = () => {
       <MenuCategory items={women}></MenuCategory>
       {/* Custom section */}
       <MenuCategory items={custom} title="Custom" img={menuImg}></MenuCategory>
+      {/* men Section */}
+      <MenuCategory items={men} title="Men" img={menuImg}></MenuCategory>
     </div>
   );
 };
