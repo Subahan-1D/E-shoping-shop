@@ -12,7 +12,7 @@ const Navbar = () => {
         <Link to="/menu">Product-Menu</Link>
       </li>
       <li className="hover:text-yellow-500 transition-all duration-300">
-        <Link to="/order">Order-Product</Link>
+        <Link to="/order/Men">Order-Product</Link>
       </li>
     </>
   );

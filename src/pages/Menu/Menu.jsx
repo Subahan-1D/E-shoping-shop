@@ -20,7 +20,7 @@ const Menu = () => {
         heading="today offers"
         subHeading="Don't Miss"
       ></SectionTitle>
-      <MenuCategory items={women}></MenuCategory>
+      <MenuCategory items={women} title="Women" img={menuImg}></MenuCategory>
       {/* Custom section */}
       <MenuCategory items={custom} title="Custom" img={menuImg}></MenuCategory>
       {/* men Section */}

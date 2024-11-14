@@ -99,22 +99,13 @@
       "category": "Women"
     },
     {
-      "_id": "11",
-      "name": "Trendy Women's T-Shirt",
-      "price": 27.50,
-      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
-      "size": "Medium",
-      "quality": "High",
-      "category": "Women"
-    },
-    {
       "_id": "12",
       "name": "Trendy Women's T-Shirt",
       "price": 27.50,
       "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
       "size": "Medium",
       "quality": "High",
-      "category": "Custom"
+      "category": "Women"
     },
     {
       "_id": "13",
@@ -127,6 +118,15 @@
     },
     {
       "_id": "14",
+      "name": "Trendy Women's T-Shirt",
+      "price": 27.50,
+      "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",
+      "size": "Medium",
+      "quality": "High",
+      "category": "Custom"
+    },
+    {
+      "_id": "15",
       "name": "Trendy Women's T-Shirt",
       "price": 27.50,
       "image": "https://i.ibb.co.com/BLK0w7B/images-1.jpg",

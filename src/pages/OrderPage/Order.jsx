@@ -6,10 +6,15 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../../hooks/useMenu";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import { useParams } from "react-router-dom";
 
-const Order = ({ item }) => {
-  const [tabIndex, setTabIndex] = useState(0);
+const Order = () => {
+  const categories = ["Men", "Women", "Custom"];
+  const { category } = useParams();
+  const initialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
   const [menu] = useMenu();
+
   const women = menu.filter((item) => item.category === "Women");
   const men = menu.filter((item) => item.category === "Men");
   const custom = menu.filter((item) => item.category === "Custom");
@@ -17,7 +22,7 @@ const Order = ({ item }) => {
   return (
     <div>
       <Helmet>
-        <title>T.Shoping || Order</title>
+        <title>T.Shoping || Order-Product</title>
       </Helmet>
       <Cover img={orderImg} title="50% Discount or Order "></Cover>
       <Tabs

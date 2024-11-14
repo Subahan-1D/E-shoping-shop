@@ -1,6 +1,7 @@
 import React from "react";
 import ProductCard from "../../components/Shared/ProductCard/ProductCard";
 import Cover from "../../components/Shared/Cover/Cover";
+import { Link } from "react-router-dom";
 
 const MenuCategory = ({ items, title, img }) => {
   return (
@@ -12,7 +13,8 @@ const MenuCategory = ({ items, title, img }) => {
         ))}
       </div>
      <div className="text-center mb-5">
-     <button className="btn btn-outline border-0 border-b-4 mt-4">View All Product</button>
+     <Link to={`/order/${title}`}>
+     <button className="btn btn-outline border-0 border-b-4 mt-4">View All Product</button></Link>
      </div>
     </div>
   );
