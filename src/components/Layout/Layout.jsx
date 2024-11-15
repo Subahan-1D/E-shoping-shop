@@ -6,12 +6,13 @@ import Container from "../Container/Container";
 const Layout = () => {
   const location = useLocation();
   console.log(location);
-  const noHeaderFooter = location.pathname.includes("login");
+  const noHeaderFooter = location.pathname.includes("login","registration");
   return (
     <>
       {noHeaderFooter || <Navbar></Navbar>}
       <Outlet></Outlet>
       {noHeaderFooter || <Footer></Footer>}
+      
     </>
   );
 };
