@@ -1,13 +1,35 @@
 import { Link } from "react-router-dom";
 import img from "../../assets/logo.png";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
+import { useEffect, useRef, useState } from "react";
 
 const Login = () => {
+  const captchaRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+  };
+
+  const handleValidateCaptcha = () => {
+    const user_captcha_value = captchaRef.current.value;
+    if (validateCaptcha(user_captcha_value) == true) {
+      setDisabled(false);
+      alert("Captcha Matched");
+    } else {
+      setDisabled(true);
+      alert("Captcha Does Not Match");
+    }
   };
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] mb-10 mt-10">
@@ -102,9 +124,31 @@ const Login = () => {
               />
             </div>
             <div className="mt-6">
+              <LoadCanvasTemplate />
+              <input
+                type="text"
+                ref={captchaRef}
+                placeholder="Type the captcha above"
+                className="input input-bordered w-full mt-4 p-2 border rounded-lg"
+                required
+              />
+              <button
+                onClick={handleValidateCaptcha}
+                className="btn btn-outline mt-4 w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition"
+              >
+                Validate
+              </button>
+            </div>
+
+            <div className="mt-8">
               <button
                 type="submit"
-                className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+                disabled={disabled}
+                className={`w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform rounded-lg ${
+                  disabled
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-blue-500 hover:bg-blue-600"
+                }`}
               >
                 Sign In
               </button>
