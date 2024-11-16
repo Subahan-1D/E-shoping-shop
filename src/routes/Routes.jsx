@@ -5,11 +5,13 @@ import Menu from "../pages/Menu/Menu";
 import Order from "../pages/OrderPage/Order";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
+import Error from "../pages/ErrorElement/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
