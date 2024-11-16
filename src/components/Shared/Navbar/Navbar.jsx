@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "../../Container/Container";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
   const navLinks = (
     <>
       <li className="hover:text-yellow-500 transition-all duration-300">
@@ -15,8 +22,26 @@ const Navbar = () => {
         <Link to="/order/Men">Order-Product</Link>
       </li>
       <li className="hover:text-yellow-500 transition-all duration-300">
-        <Link to="/login">Login</Link>
+        <Link to="/secret">Secret</Link>
       </li>
+
+      {user ? (
+        <>
+       <span>{user?.displayName}</span>
+          <button
+            onClick={handleLogOut}
+            className="btn btn-outline border-b-4 bg-blue-600 text-white"
+          >
+            LogOut
+          </button>
+        </>
+      ) : (
+        <>
+          <li className="hover:text-yellow-500 transition-all duration-300">
+            <Link to="/login">Login</Link>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -53,7 +78,7 @@ const Navbar = () => {
         </div>
         <Link
           to="/"
-          className="text-3xl font-semibold text-yellow-500 hover:text-yellow-600 transition-all duration-300"
+          className="text-2xl font-semibold text-yellow-500 hover:text-yellow-600 transition-all duration-300"
         >
           T.Shoping House 👑
         </Link>
