@@ -11,6 +11,7 @@ const Navbar = () => {
       .then(() => {})
       .catch((error) => console.log(error));
   };
+  
   const navLinks = (
     <>
       <li className="hover:text-yellow-500 transition-all duration-300">

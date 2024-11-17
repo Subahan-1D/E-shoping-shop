@@ -3,11 +3,13 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ProductCard = ({ item }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosSecure = useAxiosSecure()
   const { name, _id, image, size, category, price } = item;
   const handleAddToCart = (product) => {
     if (user && user.email) {
@@ -19,6 +21,13 @@ const ProductCard = ({ item }) => {
         image,
         price
       }
+      axiosSecure.post('/carts', cartItem)
+      .then(res =>{
+        console.log(res.data)
+        if(res.data.insertedId){
+          toast.success(`${name}added successfully`)
+        }
+      })
 
     } else {
       Swal.fire({
