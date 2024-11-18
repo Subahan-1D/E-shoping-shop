@@ -3,59 +3,58 @@ import Container from "../../Container/Container";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
   const handleLogOut = () => {
     logOut()
       .then(() => {})
       .catch((error) => console.log(error));
   };
-  
+
   const navLinks = (
     <>
-      <li className="hover:text-yellow-500 transition-all duration-300">
+      <li className="hover:text-yellow-400 transition-all duration-300">
         <Link to="/">Home</Link>
       </li>
-      <li className="hover:text-yellow-500 transition-all duration-300">
+      <li className="hover:text-yellow-400 transition-all duration-300">
         <Link to="/menu">Product-Menu</Link>
       </li>
-      <li className="hover:text-yellow-500 transition-all duration-300">
+      <li className="hover:text-yellow-400 transition-all duration-300">
         <Link to="/order/Men">Order-Product</Link>
       </li>
-      <li className="hover:text-yellow-500 transition-all duration-300">
+      <li className="hover:text-yellow-400 transition-all duration-300">
         <Link to="/secret">Secret</Link>
       </li>
-      <li className="hover:text-yellow-500 transition-all duration-300 ">
-        <Link to="/">
-          <button className="btn">
-            <FaShoppingCart className="mr-2"></FaShoppingCart>
-            <div className="badge badge-secondary">+0</div>
+      <li className="hover:text-yellow-400 transition-all duration-300">
+        <Link to="/dashboard/cart">
+          <button className="relative flex items-center space-x-1 btn btn-ghost text-white">
+            <FaShoppingCart className="text-xl"></FaShoppingCart>
+            <div className="badge badge-secondary bg-yellow-500 text-black px-2 rounded-full">
+              {cart.length}
+            </div>
           </button>
         </Link>
       </li>
-
       {user ? (
-        <>
-          <button
-            onClick={handleLogOut}
-            className="btn btn-outline border-b-4 bg-blue-600 text-white"
-          >
-            LogOut
-          </button>
-        </>
+        <button
+          onClick={handleLogOut}
+          className="btn btn-outline border-b-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-indigo-500 hover:to-blue-500 transition-all duration-300"
+        >
+          LogOut
+        </button>
       ) : (
-        <>
-          <li className="hover:text-yellow-500 transition-all duration-300">
-            <Link to="/login">Login</Link>
-          </li>
-        </>
+        <li className="hover:text-yellow-400 transition-all duration-300">
+          <Link to="/login">Login</Link>
+        </li>
       )}
     </>
   );
 
   return (
-    <div className="navbar fixed z-50 bg-black bg-opacity-70 backdrop-blur-lg shadow-lg max-w-screen-xl mx-auto py-2 px-4">
+    <div className="navbar fixed z-50 bg-gradient-to-b from-black to-gray-800 bg-opacity-90 backdrop-blur-lg shadow-xl max-w-screen-xl mx-auto py-3 px-6 rounded-b-lg border-b border-gray-700">
       <div className="navbar-start">
         <div className="dropdown">
           <button
@@ -80,25 +79,25 @@ const Navbar = () => {
           </button>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-gray-800 rounded-lg z-[1] mt-3 w-52 p-2 shadow-lg text-white text-lg"
+            className="menu menu-sm dropdown-content bg-gray-800 backdrop-blur-sm rounded-lg z-[1] mt-3 w-52 p-2 shadow-lg text-white space-y-2"
           >
             {navLinks}
           </ul>
         </div>
         <Link
           to="/"
-          className="text-2xl font-semibold text-yellow-500 hover:text-yellow-600 transition-all duration-300"
+          className="text-2xl font-bold text-yellow-500 hover:text-yellow-400 transition-all duration-300"
         >
-          T.Shoping House 👑
+          T.Shoping House
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-4 text-white text-lg space-x-4">
+        <ul className="menu menu-horizontal px-4 text-white text-lg space-x-6">
           {navLinks}
         </ul>
       </div>
       <div className="navbar-end">
-        <button className="btn btn-primary px-4 py-2 rounded-lg shadow-md hover:bg-yellow-600 hover:shadow-lg transition-all duration-300">
+        <button className="btn bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-5 py-2 rounded-full shadow-md hover:from-orange-400 hover:to-yellow-400 transition-all duration-300">
           Shop Now
         </button>
       </div>

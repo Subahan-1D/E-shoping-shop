@@ -8,6 +8,12 @@ import Registration from "../pages/Registration/Registration";
 import Error from "../pages/ErrorElement/Error";
 import Secret from "../components/Shared/Secret/Secret";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../components/Layout/Dashboard";
+import Cart from "../pages/Dashboard/Cart";
+import Admin from "../pages/Dashboard/Admin";
+import Reservation from "../components/Layout/Reservation";
+import Review from "../pages/Dashboard/review";
+import Bookings from "../pages/Dashboard/Bookings";
 
 const router = createBrowserRouter([
   {
@@ -33,11 +39,41 @@ const router = createBrowserRouter([
       },
       {
         path: "/registration",
-        element:<Registration></Registration>,
+        element: <Registration></Registration>,
       },
       {
         path: "/secret",
-        element:<PrivateRoute><Secret></Secret></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <Secret></Secret>
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "admin-Panel",
+        element: <Admin></Admin>,
+      },
+      {
+        path: "cart",
+        element: <Cart></Cart>,
+      },
+      {
+        path: "reserve",
+        element: <Reservation></Reservation>,
+      },
+      {
+        path: "review",
+        element: <Review></Review>,
+      },
+      {
+        path: "booking",
+        element: <Bookings></Bookings>,
       },
     ],
   },

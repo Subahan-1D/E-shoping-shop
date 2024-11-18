@@ -4,31 +4,33 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCart from "../../hooks/useCart";
 
 const ProductCard = ({ item }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
+  const [, refetch] = useCart();
   const { name, _id, image, size, category, price } = item;
   const handleAddToCart = (product) => {
     if (user && user.email) {
-      console.log(user.email ,product)
+      console.log(user.email, product);
       const cartItem = {
-        menuId : _id,
-        email:user.email,
+        menuId: _id,
+        email: user.email,
         name,
         image,
-        price
-      }
-      axiosSecure.post('/carts', cartItem)
-      .then(res =>{
-        console.log(res.data)
-        if(res.data.insertedId){
-          toast.success(`${name}added successfully`)
+        price,
+      };
+      axiosSecure.post("/carts", cartItem).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          toast.success(`${name}added successfully`);
+          // refetch cart to update the cart items the count
+          refetch();
         }
-      })
-
+      });
     } else {
       Swal.fire({
         title: "You are not logged In",
