@@ -14,6 +14,7 @@ import Admin from "../pages/Dashboard/Admin";
 import Reservation from "../components/Layout/Reservation";
 import Review from "../pages/Dashboard/review";
 import Bookings from "../pages/Dashboard/Bookings";
+import AllUsers from "../pages/Dashboard/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,12 @@ const router = createBrowserRouter([
         path: "booking",
         element: <Bookings></Bookings>,
       },
+
+      // admin home 
+      {
+        path:"all-user",
+        element:<AllUsers></AllUsers>
+      }
     ],
   },
 ]);
