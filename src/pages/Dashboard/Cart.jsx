@@ -2,90 +2,100 @@ import React from "react";
 import useCart from "../../hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Cart = () => {
-  const [cart] = useCart();
-  // reduce and price +
+  const [cart, refetch] = useCart();
+  const axiosSecure = useAxiosSecure();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
-  // delete
   const handleDelete = (id) => {
     Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-        //   Swal.fire({
-        //     title: "Deleted!",
-        //     text: "Your file has been deleted.",
-        //     icon: "success"
-        //   });
-        }
-      });
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`carts/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire("Deleted!", "Your item has been deleted.", "success");
+          }
+        });
+      }
+    });
   };
+
   return (
-    <div className="border bg-slate-100 p-10">
-      <div className="flex justify-around items-center gap-4">
-        <h2 className="text-2xl">TOTAL ORDER : {cart.length}</h2>
-        <h2 className="text-2xl">TOTAL PRICE : {totalPrice}</h2>
-        <button className="btn btn-primary">Pay</button>
+    <div className="bg-white p-8 rounded-xl shadow-md">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-semibold text-gray-700">
+          TOTAL ORDER: {cart.length}
+        </h2>
+        <h2 className="text-2xl font-semibold text-gray-700">
+          TOTAL PRICE: ${totalPrice.toFixed(2)}
+        </h2>
+        <button className="btn btn-primary bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-md hover:shadow-lg transition-all duration-300">
+          Pay Now
+        </button>
       </div>
       <div className="divider"></div>
-      <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
+      <div className="overflow-x-auto rounded-lg shadow-sm">
+        <table className="min-w-full table-auto border-separate border-spacing-0">
           <thead>
-            <tr className="text-2xl text-black font-bold">
-              <th>
-                <label>
-                  <h2>#</h2>
-                </label>
+            <tr className="text-left bg-gray-200">
+              <th className="px-4 py-3 border-b text-gray-700 font-semibold">
+                #
               </th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Action</th>
+              <th className="px-4 py-3 border-b text-gray-700 font-semibold">
+                Image
+              </th>
+              <th className="px-4 py-3 border-b text-gray-700 font-semibold">
+                Name
+              </th>
+              <th className="px-4 py-3 border-b text-gray-700 font-semibold">
+                Price
+              </th>
+              <th className="px-4 py-3 border-b text-gray-700 font-semibold">
+                Action
+              </th>
             </tr>
           </thead>
-          <tbody>
-            {/* row 1 */}
+          <tbody className="bg-white">
             {cart.map((item, index) => (
-              <tr key={item._id}>
-                <th>
-                  <label>{index + 1}</label>
-                </th>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={item.image}
-                          alt="Avatar Tailwind CSS Component"
-                        />
-                      </div>
+              <tr key={item._id} className="hover:bg-gray-50 transition">
+                <td className="px-4 py-4 border-b text-gray-600">
+                  {index + 1}
+                </td>
+                <td className="px-4 py-4 border-b">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 overflow-hidden rounded-full border-2 border-gray-300">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   </div>
                 </td>
-                <td>
-                  <br />
-                  <span className="badge badge-ghost badge-sm">
-                    {item.name}
-                  </span>
+                <td className="px-4 py-4 border-b text-gray-600">
+                  {item.name}
                 </td>
-                <td>{item.price}</td>
-                <th>
+                <td className="px-4 py-4 border-b text-gray-600">
+                  ${item.price.toFixed(2)}
+                </td>
+                <td className="px-4 py-4 border-b">
                   <button
                     onClick={() => handleDelete(item._id)}
-                    className="btn btn-ghost btn-lg "
+                    className="btn bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-all"
                   >
-                    <FaTrashAlt className="text-red-700"></FaTrashAlt>
+                    <FaTrashAlt />
                   </button>
-                </th>
+                </td>
               </tr>
             ))}
           </tbody>

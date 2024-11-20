@@ -42,6 +42,10 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     });
   };
+
+  // google signIn
+  
+  cons
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);

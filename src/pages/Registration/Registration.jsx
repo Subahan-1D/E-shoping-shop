@@ -7,11 +7,12 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const Registration = () => {
+  const axiosPublic = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
   const from = location.state?.from?.pathname || "/";
   const {
     register,
@@ -29,18 +30,28 @@ const Registration = () => {
       console.log(loggedUser);
       updateUserProfile(data.name, data.photo)
         .then(() => {
-          console.log("user profile updated");
-          reset();
-          toast.success("User created successfully!");
+          // create user in the database
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfo)
+        
+          .then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added to the database")
+              reset();
+              toast.success("User created successfully!");
+            }
+          });
         })
         .catch((error) => {
           console.log("Profile update error:", error);
           toast.error("Profile update failed!");
         });
-    
+
       navigate(from, { replace: true });
     });
-    
   };
 
   return (
