@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAuth from "../../hooks/useAuth";
 const Registration = () => {
   const axiosPublic = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +22,7 @@ const Registration = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, googleSignIn } = useAuth();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -35,15 +36,16 @@ const Registration = () => {
             name: data.name,
             email: data.email,
           };
-          axiosPublic.post("/users", userInfo)
-        
-          .then((res) => {
-            if (res.data.insertedId) {
-              console.log("user added to the database")
-              reset();
-              toast.success("User created successfully!");
-            }
-          });
+          axiosPublic
+            .post("/users", userInfo)
+
+            .then((res) => {
+              if (res.data.insertedId) {
+                console.log("user added to the database");
+                reset();
+                toast.success("User created successfully!");
+              }
+            });
         })
         .catch((error) => {
           console.log("Profile update error:", error);
@@ -52,6 +54,18 @@ const Registration = () => {
 
       navigate(from, { replace: true });
     });
+  };
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+        toast.success(" login successfully!");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log("login error:", error);
+        toast.error("login failed!");
+      });
   };
 
   return (
@@ -92,9 +106,12 @@ const Registration = () => {
                 </svg>
               </div>
 
-              <span className="w-5/6 px-4 py-3 font-bold text-center">
+              <button
+                onClick={handleGoogleSignIn}
+                className="w-5/6 px-4 py-3 font-bold text-center"
+              >
                 Sign in with Google
-              </span>
+              </button>
             </div>
 
             <div className="flex items-center justify-between mt-4">

@@ -1,6 +1,7 @@
 import React from "react";
 import {
   FaCalendar,
+  FaEnvelope,
   FaHome,
   FaList,
   FaSearch,
@@ -10,14 +11,21 @@ import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../../hooks/useCart";
 
 const Dashboard = () => {
-  const [cart] = useCart()
+  const [cart] = useCart();
+
+  const isAdmin = true;
   return (
     <div className="flex">
       <div className="w-64 bg-green-600 min-h-screen">
         <ul className="menu my-2 mx-2 gap-3">
+          {
+            isAdmin ? <></> : 
+            
+            <>
+            </>          }
           <li>
             <NavLink to="/dashboard/admin-Panel">
-              <FaHome></FaHome> Admin Panel
+              <FaHome></FaHome> User Home
             </NavLink>
           </li>
           <li>
@@ -49,6 +57,11 @@ const Dashboard = () => {
           <li>
             <NavLink to="/order/Men">
               <FaSearch></FaSearch> Order-Product
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/order/contact">
+              <FaEnvelope></FaEnvelope> Contact
             </NavLink>
           </li>
         </ul>

@@ -12,9 +12,11 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -63,6 +65,18 @@ const Login = () => {
       toast.error("Captcha Does Not Match");
     }
   };
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+        toast.success(" login successfully!");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log("login error:", error);
+        toast.error("login failed!");
+      });
+  };
 
   return (
     <>
@@ -109,9 +123,12 @@ const Login = () => {
                 </svg>
               </div>
 
-              <span className="w-5/6 px-4 py-3 font-bold text-center">
+              <button
+                onClick={handleGoogleSignIn}
+                className="w-5/6 px-4 py-3 font-bold text-center"
+              >
                 Sign in with Google
-              </span>
+              </button>
             </div>
 
             <div className="flex items-center justify-between mt-4">
