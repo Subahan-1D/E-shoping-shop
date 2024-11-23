@@ -13,11 +13,12 @@ import {
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../../hooks/useCart";
 import { IoBagAddSharp } from "react-icons/io5";
+import useAdmin from "../../hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
 
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
     <div className="flex">
       <div className="w-64 bg-green-600 min-h-screen">
