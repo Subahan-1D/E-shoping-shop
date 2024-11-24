@@ -17,7 +17,6 @@ import useAdmin from "../../hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
-
   const [isAdmin] = useAdmin();
   return (
     <div className="flex">
@@ -27,7 +26,7 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink to="/dashboard/admin">
-                  <FaHome></FaHome> Admin Panel
+                  <FaHome></FaHome> Admin Home
                 </NavLink>
               </li>
               <li>
@@ -54,12 +53,13 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/admin-Panel">
+                <NavLink to="/dashboard/user-home">
                   <FaHome></FaHome> User Home
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/reserve">
+                
                   <FaCalendar></FaCalendar> Reservation
                 </NavLink>
               </li>
