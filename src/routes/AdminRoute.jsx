@@ -4,9 +4,9 @@ import useAuth from "../hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
 import { PropagateLoader } from "react-spinners";
 
-const AdminRoute = (children) => {
+const AdminRoute = ({children}) => {
   const [isAdmin, isPendingLoading] = useAdmin();
-  const [user, loading] = useAuth();
+  const {user, loading} = useAuth();
   const location = useLocation();
   if (loading || isPendingLoading) {
     return <PropagateLoader></PropagateLoader>;
@@ -15,7 +15,7 @@ const AdminRoute = (children) => {
   if (user && isAdmin) {
     return children;
   }
-  return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
+  return <Navigate to="/" state={{ from: location }} replace></Navigate>;
 };
 
 export default AdminRoute;
