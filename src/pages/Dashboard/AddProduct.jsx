@@ -2,10 +2,22 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { FaShoppingCart } from "react-icons/fa";
-
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddProduct = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const axiosPublic = useAxiosPublic();
+  const onSubmit = async (data) => {
+    console.log(data);
+    const imageFile = { image: data.image[0] };
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    console.log(res.data);
+  };
 
   return (
     <div className="p-6 md:p-12 border bg-slate-100">
