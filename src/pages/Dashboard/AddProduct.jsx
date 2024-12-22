@@ -3,11 +3,15 @@ import { useForm } from "react-hook-form";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { FaShoppingCart } from "react-icons/fa";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddProduct = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
     console.log(data);
     const imageFile = { image: data.image[0] };
@@ -16,7 +20,30 @@ const AddProduct = () => {
         "content-type": "multipart/form-data",
       },
     });
-    console.log(res.data);
+    if (res.data.success) {
+      const productItem = {
+        name: data.name,
+        category: data.category,
+        size: data.size,
+        quality: data.quality,
+        price: parseFloat(data.price),
+        image: res.data.data.display_url,
+      };
+      const productResponse = await axiosSecure.post("/menu", productItem);
+      console.log(productResponse.data);
+      if (productResponse.data.insertedId) {
+        //show toast popup
+        reset();
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: `${data.name} added to by product`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
+    console.log("with imagebbb url", res.data);
   };
 
   return (
@@ -76,17 +103,31 @@ const AddProduct = () => {
           </div>
 
           {/* Product Details */}
-          <div className="form-control my-4">
-            <label className="label">
-              <span className="label-text font-semibold">
-                Product Quality *
-              </span>
-            </label>
-            <textarea
-              {...register("quality", { required: true })}
-              className="textarea textarea-bordered h-24 w-full"
-              placeholder="Enter product quality"
-            ></textarea>
+          <div className="flex gap-6">
+            <div className="form-control w-full my-4">
+              <label className="label">
+                <span className="label-text font-semibold">
+                  Product Quality *
+                </span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter product quality"
+                {...register("quality", { required: true })}
+                className="input input-bordered w-full"
+              />
+            </div>
+            <div className="form-control w-full my-4">
+              <label className="label">
+                <span className="label-text font-semibold">Product size*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter product size"
+                {...register("size", { required: true })}
+                className="input input-bordered w-full"
+              />
+            </div>
           </div>
 
           {/* Image Upload */}
