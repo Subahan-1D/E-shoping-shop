@@ -20,6 +20,7 @@ import ManageItems from "../pages/Dashboard/ManageItems";
 import ManageBookings from "../pages/Dashboard/ManageBookings";
 import UserHome from "../pages/Dashboard/UserHome";
 import AdminRoute from "./AdminRoute";
+import UpdateItem from "../pages/Dashboard/UpdateItem";
 
 const router = createBrowserRouter([
   {
@@ -86,7 +87,7 @@ const router = createBrowserRouter([
         element: <Bookings></Bookings>,
       },
 
-      // admin home
+      // admin only routes
       {
         path: "admin",
         element: (
@@ -110,6 +111,15 @@ const router = createBrowserRouter([
             <ManageItems></ManageItems>
           </AdminRoute>
         ),
+      },
+      {
+        path: "updateItem/:id",
+        element: (
+          <AdminRoute>
+            <UpdateItem></UpdateItem>
+          </AdminRoute>
+        ),
+        loader:({params}) => fetch(`http://localhost:8000/menu/${params.id}`)
       },
       {
         path: "all-user",

@@ -4,6 +4,7 @@ import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import useMenu from "../../hooks/useMenu";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
   const [menu, , refetch] = useMenu();
@@ -42,7 +43,6 @@ const ManageItems = () => {
             <table className="min-w-full table-auto border-separate border-spacing-0">
               <thead>
                 <tr className="text-left bg-gray-200">
-                  <h2>Total : {menu.length}</h2>
                   <th className="px-4 py-3 border-b text-gray-700 font-semibold">
                     #
                   </th>
@@ -87,9 +87,11 @@ const ManageItems = () => {
                       ${item.price}
                     </td>
                     <td className="px-4 py-4 border-b">
-                      <button className="flex items-center gap-2 btn bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition-all">
-                        <FaEdit />
-                      </button>
+                      <Link to={`/dashboard/updateItem/${item._id}`}>
+                        <button className="flex items-center gap-2 btn bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition-all">
+                          <FaEdit />
+                        </button>
+                      </Link>
                     </td>
                     <td className="px-4 py-4 border-b">
                       <button
