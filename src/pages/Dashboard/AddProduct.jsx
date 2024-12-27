@@ -48,11 +48,6 @@ const AddProduct = () => {
 
   return (
     <div className="p-6 md:p-12 border bg-slate-100">
-      <SectionTitle
-        heading="Add Product Item"
-        subHeading="New Collection"
-      ></SectionTitle>
-
       <div className="bg-white shadow-lg rounded-lg p-6 md:p-10">
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Product Name */}
