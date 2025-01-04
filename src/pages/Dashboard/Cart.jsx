@@ -3,6 +3,7 @@ import useCart from "../../hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -39,9 +40,17 @@ const Cart = () => {
         <h2 className="text-2xl font-semibold text-gray-700">
           TOTAL PRICE: ${totalPrice.toFixed(2)}
         </h2>
-        <button className="btn btn-primary bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-md hover:shadow-lg transition-all duration-300">
-          Pay Now
-        </button>
+        {cart.length ? (
+          <Link to="/dashboard/payment">
+            <button className="btn btn-primary bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-md hover:shadow-lg transition-all duration-300">
+              Pay Now
+            </button>
+          </Link>
+        ) : (
+          <button className="btn btn-primary bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-md hover:shadow-lg transition-all duration-300">
+            Pay Now
+          </button>
+        )}
       </div>
       <div className="divider"></div>
       <div className="overflow-x-auto rounded-lg shadow-sm">

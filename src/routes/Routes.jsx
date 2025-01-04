@@ -21,6 +21,7 @@ import ManageBookings from "../pages/Dashboard/ManageBookings";
 import UserHome from "../pages/Dashboard/UserHome";
 import AdminRoute from "./AdminRoute";
 import UpdateItem from "../pages/Dashboard/UpdateItem";
+import Payment from "../pages/Dashboard/Payment";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
         element: <Cart></Cart>,
       },
       {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
         path: "reserve",
         element: <Reservation></Reservation>,
       },
@@ -119,7 +124,8 @@ const router = createBrowserRouter([
             <UpdateItem></UpdateItem>
           </AdminRoute>
         ),
-        loader:({params}) => fetch(`http://localhost:8000/menu/${params.id}`)
+        loader: ({ params }) =>
+          fetch(`http://localhost:8000/menu/${params.id}`),
       },
       {
         path: "all-user",
