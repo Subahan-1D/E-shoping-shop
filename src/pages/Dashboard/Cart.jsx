@@ -47,7 +47,7 @@ const Cart = () => {
             </button>
           </Link>
         ) : (
-          <button className="btn btn-primary bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-md hover:shadow-lg transition-all duration-300">
+          <button disabled className="btn btn-primary bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-md hover:shadow-lg transition-all duration-300">
             Pay Now
           </button>
         )}
