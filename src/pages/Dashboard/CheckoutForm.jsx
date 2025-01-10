@@ -2,9 +2,11 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
+import useAuth from "../../hooks/useAuth";
 
 const CheckoutForm = () => {
   const [error, setError] = useState("");
+  const { user } = useAuth();
   const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
@@ -43,6 +45,19 @@ const CheckoutForm = () => {
       console.log("payment method", paymentMethod);
       setError("");
     }
+    //  confirm payment
+    const {} = await stripe.confirmCardPayment(
+      { clientSecret },
+      {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: user?.email || "anonymous",
+            name: user?.displayName || "anonymous",
+          },
+        },
+      }
+    );
   };
   return (
     <div>
