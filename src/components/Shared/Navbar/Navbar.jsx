@@ -25,9 +25,6 @@ const Navbar = () => {
         <Link to="/order/Men">Order-Product</Link>
       </li>
       <li className="hover:text-yellow-400 transition-all duration-300">
-        <Link to="/secret">Secret</Link>
-      </li>
-      <li className="hover:text-yellow-400 transition-all duration-300">
         <Link to="/dashboard/cart">
           <button className="relative flex items-center space-x-1 btn btn-ghost text-white">
             <FaShoppingCart className="text-xl"></FaShoppingCart>

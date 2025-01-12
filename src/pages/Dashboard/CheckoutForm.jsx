@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 const CheckoutForm = () => {
   const [error, setError] = useState("");
   const { user } = useAuth();
+  const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
@@ -63,6 +64,10 @@ const CheckoutForm = () => {
       console.log("confirm error");
     } else {
       console.log("payment intent", paymentIntent);
+      if (paymentIntent.status === "succeeded") {
+        console.log("transaction id ", paymentIntent.id);
+        setTransactionId(paymentIntent.id);
+      }
     }
   };
   return (
@@ -91,7 +96,16 @@ const CheckoutForm = () => {
         >
           Pay Now
         </button>
-        <p>{error}</p>
+        <p className="text-red-500">{error}</p>
+        {transactionId && (
+          <div className="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded-lg shadow-md my-4">
+            <p className="font-semibold">🎉 Transaction Successful!</p>
+            <p className="mt-1">
+              <span className="font-medium">Your Transaction ID:</span>{" "}
+              {transactionId}
+            </p>
+          </div>
+        )}
       </form>
     </div>
   );
