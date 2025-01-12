@@ -21,6 +21,7 @@ import UserHome from "../pages/Dashboard/UserHome";
 import AdminRoute from "./AdminRoute";
 import UpdateItem from "../pages/Dashboard/UpdateItem";
 import Payment from "../pages/Dashboard/Payment";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "booking",
         element: <Bookings></Bookings>,
+      },
+      {
+        path:'paymentHistory',
+        element:<PaymentHistory></PaymentHistory>
       },
 
       // admin only routes
