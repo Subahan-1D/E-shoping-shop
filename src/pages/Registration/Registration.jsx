@@ -11,7 +11,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 const Registration = () => {
   const axiosPublic = useAxiosPublic();
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";

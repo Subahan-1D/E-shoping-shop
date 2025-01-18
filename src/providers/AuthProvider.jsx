@@ -21,9 +21,8 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
   // create user
-
   const createUser = (email, password) => {
-    setLoading(false);
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -60,24 +59,25 @@ const AuthProvider = ({ children }) => {
         axiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
+            setLoading(false);
           }
         });
       } else {
         // remove token
         localStorage.removeItem("access-token");
+        setLoading(false);
       }
-      setLoading(false);
     });
     return () => {
-      unSubscribe();
+      return unSubscribe();
     };
   }, [axiosPublic]);
 
   const authInfo = {
     user,
-    loading,
     createUser,
     signIn,
+    loading,
     logOut,
     updateUserProfile,
     googleSignIn,

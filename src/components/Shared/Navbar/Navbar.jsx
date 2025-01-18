@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
 import useAuth from "../../../hooks/useAuth";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = () => {
+  const [isAdmin] = useAdmin();
   const { user, logOut } = useAuth();
   const [cart] = useCart();
 
@@ -40,6 +42,7 @@ const Navbar = () => {
           Order-Product
         </Link>
       </li>
+
       <li>
         <Link
           to="/dashboard/cart"
@@ -129,14 +132,27 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu dropdown-content bg-gray-800 text-white rounded-lg mt-3 w-48 p-3 shadow-lg space-y-2"
               >
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="hover:text-yellow-400 transition-all duration-300"
-                  >
-                    Dashboard
-                  </Link>
-                </li>
+                {user && isAdmin && (
+                  <li>
+                    <Link
+                      to="/dashboard/admin"
+                      className="hover:text-yellow-400 transition-all duration-300"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                )}
+                {user && !isAdmin && (
+                  <li>
+                    <Link
+                      to="/dashboard/user-home"
+                      className="hover:text-yellow-400 transition-all duration-300"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                )}
+
                 <li>
                   <button
                     onClick={handleLogOut}
