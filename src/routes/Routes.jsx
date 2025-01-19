@@ -121,7 +121,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:8000/menu/${params.id}`),
+          fetch(`https://shoping-center-server.vercel.app/menu/${params.id}`),
       },
       {
         path: "all-user",

@@ -3,17 +3,27 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaDollarSign, FaUserAlt } from "react-icons/fa";
+// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell } from "recharts";
 
 const MainAdmin = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: stats } = useQuery({
+  const { data: stats = [] } = useQuery({
     queryKey: ["admin-stars"],
     queryFn: async () => {
       const res = await axiosSecure.get("/admin-stars");
       return res.data;
     },
   });
+  // const { data: chartData = [] } = useQuery({
+  //   queryKey: ["order-stats"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get("/order-stats");
+  //     return res.data;
+  //   },
+  // });
+
+
   return (
     <div>
       <div className="flex flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-6 rounded-lg shadow-lg">
@@ -93,6 +103,11 @@ const MainAdmin = () => {
           </div>
           <div className="stat-desc text-blue-500">↘︎ 70 (17%)</div>
         </div>
+      </div>
+      <div className="flex">
+        <div className="w-1/2">
+        </div>
+        <div className="w-1/2"></div>
       </div>
     </div>
   );
